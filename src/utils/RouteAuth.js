@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux'
 import { Navigate, Outlet, Route } from 'react-router-dom'
 
 function RouteAuth({ props }) {
-  const isAuth = useSelector(state => state.user.isAuth)
+  // const isAuth = useSelector(state => state.user.isAuth)
+  const isAuth = true;
   console.log('isAuth >>> ', isAuth)
   return isAuth ? <Outlet /> : <Navigate to="/login" />
 }

@@ -14,6 +14,7 @@ import ProductDetail from './Components/ProductDetail';
 import CreateProduct from './Components/CreateProduct';
 import Dashboard from './Components/Dashboard';
 import RouteAuth from './utils/RouteAuth';
+import CreateCategory from './Components/CreateCategory';
 
 function App() {
   return (
@@ -23,11 +24,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route exact path='/' element={<RouteAuth/>}>
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create-product" element={<CreateProduct />} />
+            <Route path="/create-category" element={<CreateCategory />} />
           </Route>
         </Routes>
       </BrowserRouter>

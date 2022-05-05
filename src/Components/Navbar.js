@@ -7,7 +7,8 @@ import "../styles/Header.scss";
 
 
 export default function NavBar({ }) {
-    const [{ basket }, dispatch] = useStateValue();
+    // const [{ basket }, dispatch] = useStateValue();
+    const basket = 2;
 
     return (
         <div className="header">

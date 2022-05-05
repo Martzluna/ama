@@ -6,7 +6,8 @@ import { useStateValue } from "./StateProvider";
 import { Link } from "react-router-dom";
 
 function Checkout() {
-  const [{ basket }, dispatch] = useStateValue();
+  // const [{ basket }, dispatch] = useStateValue();
+  const basket = 2;
   return (
     <div className="checkout">
       <div className="checkoutLeft">

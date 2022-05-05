@@ -13,6 +13,7 @@ import Checkout from './Components/Checkout';
 import ProductDetail from './Components/ProductDetail';
 import CreateProduct from './Components/CreateProduct';
 import Dashboard from './Components/Dashboard';
+import RouteAuth from './utils/RouteAuth';
 
 function App() {
   return (
@@ -25,7 +26,9 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/create-product" element={<CreateProduct />} />
+          <Route exact path='/' element={<RouteAuth/>}>
+            <Route path="/create-product" element={<CreateProduct />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

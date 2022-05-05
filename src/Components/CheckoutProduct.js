@@ -4,13 +4,14 @@ import { useStateValue } from "./StateProvider";
 import FlipMove from "react-flip-move";
 
 function CheckoutProduct({ id, title, image, price, rating }) {
-  const [{ basket }, dispatch] = useStateValue();
+  // const [{ basket }, dispatch] = useStateValue();
+  const basket = 2;
 
   const removeFromBasket = () => {
-    dispatch({
-      type: "REMOVE_FROM_BASKET",
-      id: id
-    });
+    // dispatch({
+    //   type: "REMOVE_FROM_BASKET",
+    //   id: id
+    // });
   };
 
   return (

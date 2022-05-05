@@ -3,12 +3,12 @@ import { GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDvjrK1x15sJ5umUGj-DpQ0b5PnYecfuhM",
-    authDomain: "prueba-tecnica-clima.firebaseapp.com",
-    projectId: "prueba-tecnica-clima",
-    storageBucket: "prueba-tecnica-clima.appspot.com",
-    messagingSenderId: "263773120052",
-    appId: "1:263773120052:web:1603a68426eb0c86c80c61"
+    apiKey: "AIzaSyDLD_Xxuk9Cg9a5tDIHNNABbK8ClMbui5g",
+    authDomain: "as-c2cf3.firebaseapp.com",
+    projectId: "as-c2cf3",
+    storageBucket: "as-c2cf3.appspot.com",
+    messagingSenderId: "672461786188",
+    appId: "1:672461786188:web:6cf18f32ed4c5e22cfb8e9"
 }
 
 // Initialize Firebase and Firestore

@@ -1,0 +1,16 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 30px;
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+.contentButton {
+    display: flex;
+    gap: 20px;
+    > button {
+        width: 200px;
+    }
+}

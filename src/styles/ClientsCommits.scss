@@ -1,28 +1,41 @@
-
-
-
 .contentComment {
     display: flex;
     gap: 10px;
     font-size: 14px;
-   > div {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #CACACA;
-    text-align: center;
-    color: white;
-    font-size: 20px;
+
+    >div {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        background-color: #CACACA;
+        text-align: center;
+        color: white;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+
+        >p {
+            font-weight: bold;
+            margin: auto;
+        }
+
+        >img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+.sendCommit {
     display: flex;
-    align-items: center;
-    > p {
-        font-weight: bold;
-        margin: auto;
-    }
-    > img {
-        height: 100%;
-        width: 100%;
-    }
-   }
+    width: 70vh;
+    margin-bottom: 20px;
+}
+
+.sendButton {
+    background-color: #f0c14b !important;
+    border-radius: 0px !important;
+    color: #111;
+    border-color: #a88734 #9c7e31 #846a29;
 }

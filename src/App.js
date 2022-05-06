@@ -15,6 +15,7 @@ import CreateProduct from './Components/CreateProduct';
 import Dashboard from './Components/Dashboard';
 import RouteAuth from './utils/RouteAuth';
 import CreateCategory from './Components/CreateCategory';
+import Register from './Components/Register';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route exact path='/' element={<RouteAuth/>}>

@@ -6,7 +6,6 @@ import '../styles/ProductPriceAdd.scss'
 
 function ProductPriceAdd({ data, idProduct }) {
     const { title, price, brand, color, estilo, garantia, descripcion } = data
-    console.log(data)
     const dispatch = useDispatch()
     const handleAddProduct = () => {
         dispatch(addProduct(idProduct))

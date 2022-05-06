@@ -7,14 +7,14 @@ function CarrouselImages({ images = [] }) {
         setImageSelect(index)
     }
     return (
-        <div className='content'>
+        <div className='contentImages'>
             <div className='contentThumbnails'>
                 {images.map((image, index) => (
-                    <img className={imageSelect === index ? "active" : ""} onMouseOver={() => handleSelectImage(index)} src={require(`../assets/${image}`)} key={index} />
+                    <img className={imageSelect === index ? "active" : ""} onMouseOver={() => handleSelectImage(index)} src={image.url} key={index} />
                 ))}
             </div>
             <div className='contentActive'>
-                    <img src={require(`../assets/${images[imageSelect]}`)} />
+                <img src={images[imageSelect].url} />
             </div>
         </div>
     )

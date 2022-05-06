@@ -1,16 +1,32 @@
 import { Search, ShoppingBasket, ShoppingCartOutlined } from '@mui/icons-material'
-import { React } from 'react'
+import { React, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useStateValue } from './StateProvider';
 import "../styles/Header.scss";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { listProductFilter } from '../Redux/actions/product';
 
 
 
 export default function NavBar({ }) {
+    const dispatch = useDispatch();
+    const inputSearch = useRef(null);
+    const [categorySelect, setCategorySelect] = useState("")
     const listCategories = useSelector(state => state.product.listCategories);
     const basket = useSelector(state => state.product.checkoutBasket);
     console.log(basket)
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const data = {
+            search: inputSearch.current.value,
+            category: categorySelect
+        }
+        dispatch(listProductFilter(data))
+    }
+
+    const handleChange = (e) => {
+        setCategorySelect(e.target.value)
+    }
     
     return (
         <div className="header">
@@ -22,18 +38,20 @@ export default function NavBar({ }) {
                 />
             </Link>
 
-            <div className="headersearch">
+            <form className="headersearch" onSubmit={handleSearch}>
                 <div>
-                    <select>
+                    <select onChange={handleChange}>
                         <option value="">All Categories</option>
                         {listCategories?.map((item) => (
                             <option key={item.id} value={item.id}>{item.name}</option>
                         ))}
                     </select>
-                    <input type="text" className="headersearchinput" />
+                    <input ref={inputSearch} type="text" className="headersearchinput" />
                 </div>
-                <Search className="headerSearchIcon" />
-            </div>
+                <button type='submit' className="headerSearchIcon">
+                    <Search  />
+                </button>
+            </form>
 
             <div className="headernav">
                 <Link to="/login">

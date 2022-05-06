@@ -3,11 +3,13 @@ import React from 'react'
 import '../styles/CreateProduct.scss'
 
 function CreateProduct() {
+  const handleSubmit = (values, { setSubmitting }) => {
+    console.log('values >>> ', values)
+  }
   return (
     <div className='containerCrud'>
-      <h2>Crud</h2>
       <Formik
-        initialValues={{ nombre: '', precio: '', categoria: '', marca: '', estilo: '', color: '', descripcion: '', tiempoEntrega: '' }}
+        initialValues={{ nombre: '', precio: '', categoria: '', marca: '', estilo: '', color: '', descripcion: '', tiempoEntrega: '', images: [] }}
         validate={values => {
           const errors = {};
           if (!values.nombre) {
@@ -16,12 +18,7 @@ function CreateProduct() {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-        }}
+        onSubmit={handleSubmit}
       >
         {({
           values,
@@ -31,6 +28,7 @@ function CreateProduct() {
           handleBlur,
           handleSubmit,
           isSubmitting,
+          setFieldValue
           /* and other goodies */
         }) => (
           <form className='crudContent' onSubmit={handleSubmit}>
@@ -170,10 +168,30 @@ function CreateProduct() {
                 )}
               </div>
             </div>
+            <div>
+              <label>Imagenes</label>
+              <div>
+                <input
+                  type="file"
+                  multiple
+                  accept='image/*'
+                  name="tiempoEntrega"
+                  onBlur={handleBlur}
+                  onChange={(event) => {
+                    setFieldValue("images", event.currentTarget.files);
+                  }}
+                />
+                {errors.nombre && touched.nombre && (
+                  <span>
+                    {errors.nombre}
+                  </span>
+                )}
+              </div>
+            </div>
             <div className='btnContainer'>
-            <button type="submit" disabled={isSubmitting}>
-              Crear
-            </button>
+              <button type="submit" disabled={isSubmitting}>
+                Crear
+              </button>
             </div>
           </form>
         )}

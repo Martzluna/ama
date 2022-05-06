@@ -4,16 +4,23 @@ import Subtotal from "./Subtotal";
 import CheckoutProduct from "./CheckoutProduct.js";
 import { useStateValue } from "./StateProvider";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeProduct } from "../Redux/actions/product";
 
 function Checkout() {
+  const dispatch = useDispatch()
   const baskets = useSelector(state => state.product.checkoutBasket);
   const listProduct = useSelector(state => state.product.listProducts);
-  const searchProduct = listProduct
 
-  console.log(listProduct)
-  // const [{ basket }, dispatch] = useStateValue();
-  const basket = 2;
+  const searchProduct = baskets.map(productID => {
+      return listProduct.find(x => x.id === productID)
+  })
+  const calculateTotalPrice = searchProduct.reduce((prev, current) => prev + current.price , 0)
+
+  const removeFromBasket = (data) => {
+    dispatch(removeProduct(data));
+  };
+
   return (
     <div className="checkout">
       <div className="checkoutLeft">
@@ -26,20 +33,21 @@ function Checkout() {
         </Link>
         <div>
           <h2 className="checkoutTitle">Your Shopping Basket</h2>
-          {/* {basket.map((item) => (
+         {searchProduct.map((item) => (
             <CheckoutProduct
               id={item.id}
-              title={item.title}
-              image={item.image}
+              title={item.name}
+              image={item.images[0].url}
               price={item.price}
-              rating={item.rating}
+              category={item.category}
+              removeFromBasket={removeFromBasket}
             />
-          ))} */}
+          ))} 
         </div>
       </div>
 
       <div className="checkoutRight">
-        <Subtotal />
+        <Subtotal price ={calculateTotalPrice} product={searchProduct} />
       </div>
     </div>
   );

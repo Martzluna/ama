@@ -13,3 +13,15 @@ export const listCategoriesAction = () =>  async (dispatch)  => {
         list: formatted 
     })
 }
+
+export const showComments = () =>  async (dispatch)  => {
+    const getData = await getDocs(collection(db, "comments"));
+    console.log(getData)
+    const list = []
+    getData.forEach(item => list.push({...item.data(), id: item.id}))
+    const commentsData = list.map(item => ({...item, dateSave: new Date(item.dateSave.toDate()).toISOString() }))
+    dispatch({
+        type: SET_LIST_CATEGORY,
+        comments: commentsData 
+    })
+}

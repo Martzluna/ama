@@ -11,10 +11,10 @@ export const createCategoryAction = async (values) => {
 }
 
 export const writeCommitAction = async (values) => {
-
     return await addDoc(collection(db, 'comments'), {
         idProduct: values.idProduct,
         comment: values.comment,
+        userName: values.userName,
         dateSave: Timestamp.now(),
     })
 }

@@ -45,7 +45,7 @@ function ProductDetail() {
             <div>
                 <RelatedProducts/>
             </div>
-                <ClientsCommits/>
+                <ClientsCommits idProduct={id} />
             <div>
             </div>
     </div>

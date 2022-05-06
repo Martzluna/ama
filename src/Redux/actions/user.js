@@ -13,7 +13,8 @@ export const logoutAsync = () => async (dispatch) => {
 export const loginGoogle = () => async (dispatch) => {
     const auth = getAuth();
     const { user } = await signInWithPopup(auth, google)
-    dispatch(handleLoginAction(user.email, user.uid))
+    console.log(user)
+    dispatch(handleLoginAction(user.email, user.uid, user.displayName))
 }
 
 export const loginFacebook = () => async (dispatch) => {
@@ -35,12 +36,11 @@ export const registerUser = ({ email, password, userName }) => async (dispatch) 
     dispatch(handleLoginAction(user.email, user.uid))
 }
 
-const handleLoginAction = (email, id) => ({
+const handleLoginAction = (email, id, name) => ({
     type: 'LOGIN',
-    payload: {
-        email,
-        id
-    }
+    email,
+        id,
+        name
 })
 
 export const validAuth = (email, id) => ({

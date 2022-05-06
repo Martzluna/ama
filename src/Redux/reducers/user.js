@@ -12,6 +12,7 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 email: action.email,
                 id: action.id,
+                name: action.name,
                 isAuth: true
             }
         }

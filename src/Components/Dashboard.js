@@ -25,7 +25,7 @@ function Dashboard() {
         </Card>
         <Card>
             <CardContent>
-                Lista Productos jasdjkaslkjas jkasdjsaljkda
+                Lista Productos
             </CardContent>
         </Card>
         </div>

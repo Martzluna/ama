@@ -61,7 +61,6 @@ export const getDetailProduct = (id) => async (dispatch)  => {
         category: categoryName.data().name,
         productsByCategory: productsFormatted
     }
-    
     dispatch({
         type: SET_DETAIL_PRODUCT,
         detailsProduct: formattedData
@@ -69,13 +68,14 @@ export const getDetailProduct = (id) => async (dispatch)  => {
 }
 
 export const listProductFilter = ({search, category}) => async (dispatch, getState)  => {
-    console.log('search, category >>> ', search, category)
     const productsRef = collection(db, "products");
-    const queryProducts = query(productsRef, where("name", "==", search) && true);
+    const optionsQuery = [];
+    if (search) optionsQuery.push(where("name", "==", search));
+    if(category !== "all") optionsQuery.push(where("category", "==", category));
+    const queryProducts = query(productsRef, ...optionsQuery);
     const products = await getDocs(queryProducts);
     const productsFormatted = []
     products.forEach(item => productsFormatted.push({...item.data(), id: item.id, dateSave: "" }))
-    console.log('productsFormatted >>> ', productsFormatted)
     dispatch({
         type: SET_LIST_PRODUCTS,
         list: productsFormatted

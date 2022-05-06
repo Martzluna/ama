@@ -41,7 +41,7 @@ export default function NavBar({ }) {
             <form className="headersearch" onSubmit={handleSearch}>
                 <div>
                     <select onChange={handleChange}>
-                        <option value="">All Categories</option>
+                        <option value="all">All Categories</option>
                         {listCategories?.map((item) => (
                             <option key={item.id} value={item.id}>{item.name}</option>
                         ))}

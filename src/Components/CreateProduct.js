@@ -1,10 +1,20 @@
 import { Formik } from 'formik'
 import React from 'react'
 import '../styles/CreateProduct.scss'
+import { Image } from 'cloudinary-react';
+import { uploadImages } from '../utils/uploadImages'
+import { createProductAction } from '../utils/connection';
+import { useDispatch } from 'react-redux';
 
 function CreateProduct() {
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log('values >>> ', values)
+  const dispatch = useDispatch()
+  const handleSubmit = async (values, { setSubmitting }) => {
+    const listImages = await uploadImages(values.images)
+    await createProductAction({
+      ...values,
+      images: listImages,
+    })
+    dispatch(listProductsAction())
   }
   return (
     <div className='containerCrud'>

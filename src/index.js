@@ -4,14 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
+import { CloudinaryContext } from 'cloudinary-react';
 import { store } from './Redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+
   <React.StrictMode>
-   <Provider store={store}>
-     <App />
-   </Provider>
+    <Provider store={store}>
+      <CloudinaryContext cloudName="dwbno71qd">
+        <App />
+      </CloudinaryContext>
+    </Provider>
   </React.StrictMode>
 );
 

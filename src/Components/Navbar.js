@@ -3,13 +3,14 @@ import { React } from 'react'
 import { Link } from 'react-router-dom'
 import { useStateValue } from './StateProvider';
 import "../styles/Header.scss";
+import { useSelector } from 'react-redux';
 
 
 
 export default function NavBar({ }) {
-    // const [{ basket }, dispatch] = useStateValue();
-    const basket = 2;
-
+    const listCategories = useSelector(state => state.product.listCategories);
+    const basket = useSelector(state => state.product.basket);
+    
     return (
         <div className="header">
             <Link to="/">
@@ -23,9 +24,10 @@ export default function NavBar({ }) {
             <div className="headersearch">
                 <div>
                     <select>
-                        <option>
-                            hols
-                        </option>
+                        <option value="">All Categories</option>
+                        {listCategories?.map((item) => (
+                            <option value={item.id}>{item.name}</option>
+                        ))}
                     </select>
                     <input type="text" className="headersearchinput" />
                 </div>

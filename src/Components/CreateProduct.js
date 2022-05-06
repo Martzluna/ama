@@ -4,10 +4,14 @@ import '../styles/CreateProduct.scss'
 import { Image } from 'cloudinary-react';
 import { uploadImages } from '../utils/uploadImages'
 import { createProductAction } from '../utils/connection';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { listProductsAction } from '../Redux/actions/product';
+import { useNavigate } from 'react-router-dom';
 
 function CreateProduct() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const listCategories = useSelector(state => state.product.listCategories)
   const handleSubmit = async (values, { setSubmitting }) => {
     const listImages = await uploadImages(values.images)
     await createProductAction({
@@ -15,16 +19,17 @@ function CreateProduct() {
       images: listImages,
     })
     dispatch(listProductsAction())
+    navigate('/dashboard')
   }
   return (
     <div className='containerCrud'>
       <Formik
-        initialValues={{ nombre: '', precio: '', categoria: '', marca: '', estilo: '', color: '', descripcion: '', tiempoEntrega: '', images: [] }}
+        initialValues={{ name: '', price: '', category: '', brand: '', style: '', color: '', description: '', timeDelivery: '', images: [] }}
         validate={values => {
           const errors = {};
-          if (!values.nombre) {
-            errors.nombre = 'Este campo es requerido';
-            errors.nombre = 'Required';
+          if (!values.name) {
+            errors.name = 'Este campo es requerido';
+            errors.name = 'Required';
           }
           return errors;
         }}
@@ -47,14 +52,14 @@ function CreateProduct() {
               <div>
                 <input
                   type="text"
-                  name="nombre"
+                  name="name"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.nombre}
+                  value={values.name}
                 />
-                {errors.nombre && touched.nombre && (
+                {errors.name && touched.name && (
                   <span>
-                    {errors.nombre}
+                    {errors.name}
                   </span>
                 )}
               </div>
@@ -63,15 +68,15 @@ function CreateProduct() {
               <label>Precio</label>
               <div>
                 <input
-                  type="text"
-                  name="precio"
+                  type="number"
+                  name="price"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.precio}
+                  value={values.price}
                 />
-                {errors.nombre && touched.nombre && (
+                {errors.price && touched.price && (
                   <span>
-                    {errors.nombre}
+                    {errors.price}
                   </span>
                 )}
               </div>
@@ -79,16 +84,15 @@ function CreateProduct() {
             <div>
               <label>Categoria</label>
               <div>
-                <input
-                  type="text"
-                  name="categoria"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.categoria}
-                />
-                {errors.nombre && touched.nombre && (
+                <select name="category" onChange={handleChange} onBlur={handleBlur} value={values.category}>
+                  <option value="">Seleccione una categoria</option>
+                  {listCategories.map(category => (
+                    <option key={category.id} value={category.id}>{category.name}</option>
+                  ))}
+                </select>
+                {errors.category && touched.category && (
                   <span>
-                    {errors.nombre}
+                    {errors.category}
                   </span>
                 )}
               </div>
@@ -98,14 +102,14 @@ function CreateProduct() {
               <div>
                 <input
                   type="text"
-                  name="marca"
+                  name="brand"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.marca}
+                  value={values.brand}
                 />
-                {errors.nombre && touched.nombre && (
+                {errors.brand && touched.brand && (
                   <span>
-                    {errors.nombre}
+                    {errors.brand}
                   </span>
                 )}
               </div>
@@ -115,14 +119,14 @@ function CreateProduct() {
               <div>
                 <input
                   type="text"
-                  name="estilo"
+                  name="style"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.estilo}
+                  value={values.style}
                 />
-                {errors.nombre && touched.nombre && (
+                {errors.style && touched.style && (
                   <span>
-                    {errors.nombre}
+                    {errors.style}
                   </span>
                 )}
               </div>
@@ -137,9 +141,9 @@ function CreateProduct() {
                   onBlur={handleBlur}
                   value={values.color}
                 />
-                {errors.nombre && touched.nombre && (
+                {errors.color && touched.color && (
                   <span>
-                    {errors.nombre}
+                    {errors.color}
                   </span>
                 )}
               </div>
@@ -149,14 +153,14 @@ function CreateProduct() {
               <div>
                 <input
                   type="text"
-                  name="descripcion"
+                  name="description"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.descripcion}
+                  value={values.description}
                 />
-                {errors.nombre && touched.nombre && (
+                {errors.description && touched.description && (
                   <span>
-                    {errors.nombre}
+                    {errors.description}
                   </span>
                 )}
               </div>
@@ -166,14 +170,14 @@ function CreateProduct() {
               <div>
                 <input
                   type="text"
-                  name="tiempoEntrega"
+                  name="timeDelivery"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.tiempoEntrega}
+                  value={values.timeDelivery}
                 />
-                {errors.nombre && touched.nombre && (
+                {errors.timeDelivery && touched.timeDelivery && (
                   <span>
-                    {errors.nombre}
+                    {errors.timeDelivery}
                   </span>
                 )}
               </div>
@@ -185,15 +189,15 @@ function CreateProduct() {
                   type="file"
                   multiple
                   accept='image/*'
-                  name="tiempoEntrega"
+                  name="images"
                   onBlur={handleBlur}
                   onChange={(event) => {
                     setFieldValue("images", event.currentTarget.files);
                   }}
                 />
-                {errors.nombre && touched.nombre && (
+                {errors.images && touched.images && (
                   <span>
-                    {errors.nombre}
+                    {errors.images}
                   </span>
                 )}
               </div>

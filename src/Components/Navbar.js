@@ -26,7 +26,7 @@ export default function NavBar({ }) {
                     <select>
                         <option value="">All Categories</option>
                         {listCategories?.map((item) => (
-                            <option value={item.id}>{item.name}</option>
+                            <option key={item.id} value={item.id}>{item.name}</option>
                         ))}
                     </select>
                     <input type="text" className="headersearchinput" />

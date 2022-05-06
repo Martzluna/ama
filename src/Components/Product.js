@@ -20,7 +20,6 @@ function Product({ id, title, image, price, rating }) {
   return (
     <Link className="product" to={`/product/${id}`}>
       <div className="productInfo">
-        
       </div>
       <img src={image} alt="" />
         <p>{title}</p>

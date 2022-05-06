@@ -1,10 +1,11 @@
-import { SET_LIST_CATEGORY, SET_LIST_PRODUCTS, SET_COMENT, ADD_PRODUCTS } from "../constants/product"
+import { SET_LIST_CATEGORY, SET_LIST_PRODUCTS, SET_COMENT, ADD_PRODUCTS, SET_DETAIL_PRODUCT } from "../constants/product"
 
 const initialState = { 
     listCategories: [],
     listProducts: [],
     basket: 0,
-    checkoutBasket: []
+    checkoutBasket: [],
+    detailProduct: {}
 }
 const initialComent = { 
     commentList: [],
@@ -31,6 +32,12 @@ export  function productsReducer(state = initialState, action) {
                     ...state.checkoutBasket,
                     action.id
                 ]
+            }
+        }
+        case SET_DETAIL_PRODUCT : {
+            return {
+                ...state,
+                detailProduct: action.detailsProduct
             }
         }
         default:

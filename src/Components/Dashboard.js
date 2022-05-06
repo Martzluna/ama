@@ -12,6 +12,8 @@ function Dashboard() {
     const dispatch = useDispatch()
     const listCategories = useSelector(state => state.product.listCategories)
     const listProducts = useSelector(state => state.product.listProducts)
+    const checkoutBasket = useSelector(state => state.product.checkoutBasket)
+    console.log(checkoutBasket)
     const deleteCategory = async (id) => {
         const deleteRef = doc(db, 'categories', id)
         await deleteDoc(deleteRef)

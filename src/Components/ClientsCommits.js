@@ -12,7 +12,6 @@ function ClientsCommits({ idProduct }) {
     const inputComment = useRef()
     const userName = useSelector(state => state.user.name)
     const listComment = useSelector(state => state.comment.commentList)
-    console.log('soy el comentario', listComment)
 
     useEffect(() => {
         dispatch(showComments())

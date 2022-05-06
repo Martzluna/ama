@@ -1,6 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../utils/firebaseConfig";
-import { SET_LIST_CATEGORY, SET_LIST_PRODUCTS, SET_COMENT } from "../constants/product";
+import { SET_LIST_CATEGORY, SET_LIST_PRODUCTS, SET_COMENT, ADD_PRODUCTS} from "../constants/product";
 
 
 export const listCategoriesAction = () =>  async (dispatch)  => {
@@ -34,4 +34,10 @@ export const listProductsAction = () =>  async (dispatch)  => {
         type: SET_LIST_PRODUCTS,
         list: formatted
     })
+}
+export const addProduct = (id) =>  {
+    return {
+        type: ADD_PRODUCTS, 
+        id
+    }
 }

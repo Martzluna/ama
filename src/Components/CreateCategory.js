@@ -1,3 +1,4 @@
+import { Timestamp } from 'firebase/firestore';
 import { Formik } from 'formik';
 import React from 'react'
 import { useDispatch } from 'react-redux';
@@ -10,7 +11,10 @@ function CreateCategory() {
     const navigate = useNavigate()
     const handleCreate = async (values, { setSubmitting, resetForm }) => {
         setSubmitting(false);
-        await createCategoryAction(values)
+        await createCategoryAction({
+            ...values,
+            dateSave: Timestamp.now(),
+        })
         resetForm()
         dispatch(listCategoriesAction())
         navigate('/dashboard')

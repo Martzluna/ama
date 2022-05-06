@@ -2,9 +2,11 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    padding: 30px;
+    width: 100%;
     justify-content: flex-start;
     gap: 30px;
+    background-color: rebeccapurple;
+    padding-top: 20px;
 }
 
 .contentButton {
@@ -12,5 +14,15 @@
     gap: 20px;
     > button {
         width: 200px;
+    }
+}
+
+.contentCards {
+    display: flex;
+    gap: 20px;
+    margin: 0 20px;
+    background-color: rebeccapurple;
+    > div {
+        flex: 1;
     }
 }

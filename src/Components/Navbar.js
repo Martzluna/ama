@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
 
 export default function NavBar({ }) {
     const listCategories = useSelector(state => state.product.listCategories);
-    const basket = useSelector(state => state.product.basket);
+    const basket = useSelector(state => state.product.checkoutBasket);
+    console.log(basket)
     
     return (
         <div className="header">
@@ -50,7 +51,7 @@ export default function NavBar({ }) {
                         <ShoppingCartOutlined fontSize='large' />
                         <span className="headerOptionTwo">Carrito </span>
                         <span className="headerOptionTwo headerBasketCount">
-                            {basket?.length}
+                            {basket?.length || 0}
                         </span>
                     </div>
                 </Link>

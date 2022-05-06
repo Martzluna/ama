@@ -4,8 +4,14 @@ import Subtotal from "./Subtotal";
 import CheckoutProduct from "./CheckoutProduct.js";
 import { useStateValue } from "./StateProvider";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Checkout() {
+  const baskets = useSelector(state => state.product.checkoutBasket);
+  const listProduct = useSelector(state => state.product.listProducts);
+  const searchProduct = listProduct
+
+  console.log(listProduct)
   // const [{ basket }, dispatch] = useStateValue();
   const basket = 2;
   return (
@@ -20,7 +26,7 @@ function Checkout() {
         </Link>
         <div>
           <h2 className="checkoutTitle">Your Shopping Basket</h2>
-          {basket.map((item) => (
+          {/* {basket.map((item) => (
             <CheckoutProduct
               id={item.id}
               title={item.title}
@@ -28,7 +34,7 @@ function Checkout() {
               price={item.price}
               rating={item.rating}
             />
-          ))}
+          ))} */}
         </div>
       </div>
 

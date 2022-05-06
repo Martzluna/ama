@@ -9,7 +9,6 @@ function ProductPriceAdd({ data, idProduct }) {
     console.log(data)
     const dispatch = useDispatch()
     const handleAddProduct = () => {
-        console.log("asdasdsd")
         dispatch(addProduct(idProduct))
     }
     return (

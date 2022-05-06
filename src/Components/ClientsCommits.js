@@ -14,18 +14,17 @@ function ClientsCommits({ idProduct }) {
     const listComment = useSelector(state => state.comment.commentList)
 
     useEffect(() => {
-        dispatch(showComments())
-    }, [])
+        dispatch(showComments(idProduct))
+    }, [idProduct])
     const handleSend = async () => {
-        console.log(inputComment.current.value)
         await writeCommitAction({
             idProduct,
             comment: inputComment.current.value,
             userName,
         })
+        inputComment.current.value = ""
+        dispatch(showComments(idProduct))
     }
-
-
 
     // const img = "https://scontent.fbog4-1.fna.fbcdn.net/v/t39.30808-6/278900903_519056286537992_778222834245015378_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=z-Ov03KWspoAX_Fv5m5&_nc_ht=scontent.fbog4-1.fna&oh=00_AT_FD-x8JKcl4L7xf9Zi5FvG9bgTsxEB1GBNJVzXMox3Pg&oe=626BDFF6"
     return (
@@ -37,25 +36,22 @@ function ClientsCommits({ idProduct }) {
                     <Send />
                 </IconButton>
             </div>
-            {listComment.map(item => {
-                return (
-                    <>
-                        <div className="contentComment">
-                            <div>
-                                {img ?
-                                    <img src={img} /> :
-                                    <p>{item.userName[0]}</p>
-                                }
-                            </div>
-                            <p>{item.userName}</p>
-                        </div>
+            {listComment.map(item => (
+                <>
+                    <div className="contentComment">
                         <div>
-                            <p>{item.comment}</p>
+                            {img ?
+                                <img src={img} /> :
+                                <p>{item.userName[0]}</p>
+                            }
                         </div>
-                    </>
-                )
-
-            })}
+                        <p>{item.userName}</p>
+                    </div>
+                    <div>
+                        <p>{item.comment}</p>
+                    </div>
+                </>
+            ))}
         </div>
     )
 }

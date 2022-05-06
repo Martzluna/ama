@@ -14,7 +14,8 @@ export default function NavBar({ }) {
     const [categorySelect, setCategorySelect] = useState("")
     const listCategories = useSelector(state => state.product.listCategories);
     const basket = useSelector(state => state.product.checkoutBasket);
-    console.log(basket)
+    const isAuth = useSelector(state => state.user.isAuth);
+    const userName = useSelector(state => state.user.name);
     const handleSearch = (e) => {
         e.preventDefault();
         const data = {
@@ -54,12 +55,21 @@ export default function NavBar({ }) {
             </form>
 
             <div className="headernav">
-                <Link to="/login">
+                {isAuth ? (
+                    <Link to="/dashboard">
+                    <div className="headeroption">
+                        <span className="headerOptionOne">Hola, {userName}</span>
+                        <span className="headerOptionTwo">Cuentas y Listas</span>
+                    </div>
+                </Link>
+                ) : (
+                    <Link to="/login">
                     <div className="headeroption">
                         <span className="headerOptionOne">Hola, identifícate</span>
                         <span className="headerOptionTwo">Cuentas y Listas</span>
                     </div>
                 </Link>
+                )}
                 <div className="headeroption">
                     <span className="headerOptionOne">Devoluciones</span>
                     <span className="headerOptionTwo">Y pedidos</span>

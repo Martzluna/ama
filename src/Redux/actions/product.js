@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "../../utils/firebaseConfig";
 import { SET_LIST_CATEGORY, SET_LIST_PRODUCTS, SET_COMENT, ADD_PRODUCTS, SET_DETAIL_PRODUCT, REMOVE_FROM_BASKET} from "../constants/product";
 
@@ -14,14 +14,16 @@ export const listCategoriesAction = () =>  async (dispatch)  => {
     })
 }
 
-export const showComments = () =>  async (dispatch)  => {
-    const getData = await getDocs(collection(db, "comments"));
+export const showComments = (idProduct) =>  async (dispatch)  => {
+    const refCollection = collection(db, "comments")
+    const queryComments = query(refCollection, where("idProduct", "==", idProduct));
+    const getData = await getDocs(queryComments);
     const list = []
     getData.forEach(item => list.push({...item.data(), id: item.id}))
     const commentsData = list.map(item => ({...item, dateSave: new Date(item.dateSave.toDate()).toISOString() }))
     dispatch({
         type: SET_COMENT,
-        comments: commentsData 
+        comments: commentsData
     })
 }
 

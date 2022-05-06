@@ -6,16 +6,17 @@ import { writeCommitAction } from "../utils/connection";
 import { useDispatch, useSelector } from "react-redux";
 import { showComments } from "../Redux/actions/product";
 
-function ClientsCommits({ idProduct}) {
+function ClientsCommits({ idProduct }) {
     const img = false
     const dispatch = useDispatch()
     const inputComment = useRef()
     const userName = useSelector(state => state.user.name)
+    const listComment = useSelector(state => state.comment.commentList)
+    console.log('soy el comentario', listComment)
 
-    useEffect(()=> {
-        console.log('primera vez')
+    useEffect(() => {
         dispatch(showComments())
-    }, []) 
+    }, [])
     const handleSend = async () => {
         console.log(inputComment.current.value)
         await writeCommitAction({
@@ -25,7 +26,7 @@ function ClientsCommits({ idProduct}) {
         })
     }
 
-    
+
 
     // const img = "https://scontent.fbog4-1.fna.fbcdn.net/v/t39.30808-6/278900903_519056286537992_778222834245015378_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=z-Ov03KWspoAX_Fv5m5&_nc_ht=scontent.fbog4-1.fna&oh=00_AT_FD-x8JKcl4L7xf9Zi5FvG9bgTsxEB1GBNJVzXMox3Pg&oe=626BDFF6"
     return (
@@ -37,19 +38,25 @@ function ClientsCommits({ idProduct}) {
                     <Send />
                 </IconButton>
             </div>
+            {listComment.map(item => {
+                return (
+                    <>
+                        <div className="contentComment">
+                            <div>
+                                {img ?
+                                    <img src={img} /> :
+                                    <p>{item.userName[0]}</p>
+                                }
+                            </div>
+                            <p>{item.userName}</p>
+                        </div>
+                        <div>
+                            <p>{item.comment}</p>
+                        </div>
+                    </>
+                )
 
-            <div className="contentComment">
-                <div>
-                    {img ?
-                        <img src={img} /> :
-                        <p>U</p>
-                    }
-                </div>
-                <p>nombre del cliente</p>
-            </div>
-            <div>
-                <p>contenido del comentario</p>
-            </div>
+            })}
         </div>
     )
 }

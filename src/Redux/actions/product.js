@@ -1,6 +1,6 @@
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../utils/firebaseConfig";
-import { SET_LIST_CATEGORY, SET_LIST_PRODUCTS, SET_COMENT, ADD_PRODUCTS, SET_DETAIL_PRODUCT} from "../constants/product";
+import { SET_LIST_CATEGORY, SET_LIST_PRODUCTS, SET_COMENT, ADD_PRODUCTS, SET_DETAIL_PRODUCT, REMOVE_FROM_BASKET} from "../constants/product";
 
 
 export const listCategoriesAction = () =>  async (dispatch)  => {
@@ -69,15 +69,23 @@ export const getDetailProduct = (id) => async (dispatch)  => {
 }
 
 export const listProductFilter = ({search, category}) => async (dispatch, getState)  => {
-    console.log('search, category >>> ', search, category)
     const productsRef = collection(db, "products");
     const queryProducts = query(productsRef, where("name", "==", search) && true);
     const products = await getDocs(queryProducts);
     const productsFormatted = []
     products.forEach(item => productsFormatted.push({...item.data(), id: item.id, dateSave: "" }))
-    console.log('productsFormatted >>> ', productsFormatted)
     dispatch({
         type: SET_LIST_PRODUCTS,
         list: productsFormatted
+    })
+}
+
+export const removeProduct = (id) => (dispatch, getState) =>  {
+    console.log("aks")
+    const listFilter = getState().product.checkoutBasket.filter(item => item !== id)
+    console.log(listFilter)
+    dispatch({
+        type: REMOVE_FROM_BASKET, 
+        list: listFilter
     })
 }

@@ -3,17 +3,7 @@ import "../styles/CheckoutProduct.scss";
 import { useStateValue } from "./StateProvider";
 import FlipMove from "react-flip-move";
 
-function CheckoutProduct({ id, title, image, price, rating }) {
-  // const [{ basket }, dispatch] = useStateValue();
-  const basket = 2;
-
-  const removeFromBasket = () => {
-    // dispatch({
-    //   type: "REMOVE_FROM_BASKET",
-    //   id: id
-    // });
-  };
-
+function CheckoutProduct({ id, title, image, price, removeFromBasket }) {
   return (
     <FlipMove>
       <div className="checkoutProduct">
@@ -24,14 +14,7 @@ function CheckoutProduct({ id, title, image, price, rating }) {
             <small>$</small>
             <strong>{price}</strong>
           </p>
-          <div className="checkoutProductRating">
-            {Array(rating)
-              .fill()
-              .map((_, i) => (
-                <p>⭐</p>
-              ))}
-          </div>
-          <button onClick={removeFromBasket}>Remove from Basket</button>
+          <button onClick={() => removeFromBasket(id)}>Remove from Basket</button>
         </div>
       </div>
     </FlipMove>

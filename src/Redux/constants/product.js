@@ -1,3 +1,4 @@
 // get list CATEGORY 
 export const SET_LIST_CATEGORY = 'SET_LIST_CATEGORY';
 export const SET_COMENT = 'SET_COMENT'
+export const SET_LIST_PRODUCTS = "SET_LIST_PRODUCTS"

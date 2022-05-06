@@ -1,21 +1,31 @@
 import { DeleteForever } from '@mui/icons-material'
-import { Button, Card, CardContent, IconButton, List, ListItem, ListItemText, Typography } from '@mui/material'
+import { Button, Card, CardContent, CardHeader, IconButton, List, ListItem, ListItemText, Typography } from '@mui/material'
 import { deleteDoc, doc } from 'firebase/firestore'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { listCategoriesAction } from '../Redux/actions/product'
+import { listCategoriesAction, listProductsAction } from '../Redux/actions/product'
 import "../styles/Dashboard.scss"
 import { db } from '../utils/firebaseConfig'
 
 function Dashboard() {
     const dispatch = useDispatch()
     const listCategories = useSelector(state => state.product.listCategories)
+    const listProducts = useSelector(state => state.product.listProducts)
     const deleteCategory = async (id) => {
         const deleteRef = doc(db, 'categories', id)
         await deleteDoc(deleteRef)
         dispatch(listCategoriesAction())
     }
+    const deleteProduct = async (id) => {
+        const deleteRef = doc(db, 'products', id)
+        await deleteDoc(deleteRef)
+        dispatch(listProductsAction())
+    }
+    useEffect(() => {
+        dispatch(listCategoriesAction())
+        dispatch(listProductsAction())
+    }, [])
     return (
         <div className='content'>
             <div className='contentButton'>
@@ -28,6 +38,9 @@ function Dashboard() {
             </div>
             <div className='contentCards'>
                 <Card>
+                    <CardHeader
+                        title="Categorias"
+                    />
                     <CardContent>
                         <List>
                             {listCategories.map(category => (
@@ -47,8 +60,23 @@ function Dashboard() {
                     </CardContent>
                 </Card>
                 <Card>
+                    <CardHeader title="Productos" />
                     <CardContent>
-                        Lista Productos jasdjkaslkjas jkasdjsaljkda
+                        <List>
+                            {listProducts.map(product => (
+                                <ListItem
+                                    key={product.id}
+                                    disableGutters
+                                    secondaryAction={
+                                        <IconButton aria-label="delete" onClick={() => deleteProduct(product.id)}>
+                                            <DeleteForever />
+                                        </IconButton>
+                                    }
+                                >
+                                    <ListItemText primary={product.name} />
+                                </ListItem>
+                            ))}
+                        </List>
                     </CardContent>
                 </Card>
             </div>

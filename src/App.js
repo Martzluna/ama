@@ -16,8 +16,16 @@ import Dashboard from './Components/Dashboard';
 import RouteAuth from './utils/RouteAuth';
 import CreateCategory from './Components/CreateCategory';
 import Register from './Components/Register';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { listCategoriesAction, listProductsAction } from './Redux/actions/product';
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(listCategoriesAction())
+    dispatch(listProductsAction())
+  }, [])
   return (
     <div className="App">
       <BrowserRouter>

@@ -18,3 +18,10 @@ export const writeCommitAction = async (values) => {
         dateSave: Timestamp.now(),
     })
 }
+
+export const createProductAction = async (values) => {
+    return await addDoc(collection(db, 'products'), {
+        ...values,
+        dateSave: Timestamp.now(),
+    })
+}
